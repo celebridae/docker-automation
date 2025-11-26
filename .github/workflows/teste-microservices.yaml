@@ -16,7 +16,7 @@ jobs:
           - name: Set up Python
             uses: actions/setup-python@v2
             with:
-              python-version: '3.12.7'
+              python-version: '3.12.4'
  
           - name: Install dependencies
             working-directory: ./burguer-app/auth-service
@@ -27,3 +27,24 @@ jobs:
           - name: Run tests 
             run: |
                 pytest          
+    test-order-service:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Set up Python
+            uses: actions/setup-python@v2
+            with:
+              python-version: '3.12.4'
+ 
+          - name: Install dependencies
+            working-directory: ./burguer-app/order-service
+            run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+            
+          - name: Run tests 
+            run: |
+                pytest -v --cov=models --cov=services --cov=config --cov=controllers
+                radon cc ./models/order_model.py
