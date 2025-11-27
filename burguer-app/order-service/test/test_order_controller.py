@@ -4,6 +4,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from controllers import order_controller
 
+print("BASE_DIR =", BASE_DIR)  # Debug to verify path
 class TestOrderController(unittest.TestCase):
     def test_example(self):
         self.assertTrue(True)
